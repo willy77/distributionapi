@@ -5,6 +5,34 @@ HOST: http://polls.apiblueprint.org/
 
 Distribution API is an API to submit loan application.
 
+# Data Structures
+
+## CustomerIdentity (object)
++ first_name: xxx (string, required)
++ last_name: xxx (string, required)
++ birth_name: xxxx (string, optional) - maiden name
++ birth_date: 19722703 (string,required) - yyyymmdd
+
+## Monetary (object)
++ amount: 123.12 (number,required)
++ devise: USD (string,required)
+
+## Customer (object)
++ identity (CustomerIdentity,required)
+
+
+## Project (object)
++ amount (Monetary, required) - The total amount of the basket
++ duration: 6 (number, optional) - The loan duration in month
++ term (Monetary, optional) - The monthly payment
++ kind : HIGH_TEC (string,required) - The basket kind
+
+## Init tx request (object)
++ vendorId: 100 (string,required) - The vendor id of the pos
++ customer  (Customer,required) - The customer identity at least
++ project (Project,required) - The customer project
+
+
 ## Initialise transaction [/transaction]
 
 ### Initialise a transaction [POST]
@@ -14,16 +42,7 @@ If the customer identity is sent, it will be used to give the best matching prop
 
 + Request (application/json)
 
-        {
-            "vendor_id": "The PF vendor identifier",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
+ + Attributes (Init tx request)
 
 + Response 200 (application/json)
 
