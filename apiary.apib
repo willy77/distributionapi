@@ -15,7 +15,7 @@ Distribution API is an API to submit loan application.
 
 ## Monetary (object)
 + amount: 123.12 (number,required)
-+ devise: USD (string,required)
++ devise: EUR (string,required)
 
 ## Customer (object)
 + identity (CustomerIdentity,required)
@@ -32,6 +32,58 @@ Distribution API is an API to submit loan application.
 + customer  (Customer,required) - The customer identity at least
 + project (Project,required) - The customer project
 
+
+## eplv project (object)
++ request_id: abc1 (string, required) - The request identifier, used to correlate the answer. 
++ project (Project ,required)
+
+## eplv request (object)
++ vendorId: 100 (string,required) - The vendor id of the pos
++ projects (array[eplv project],required) - The customer project
+
+
+## Insurance (object)
++ monthly_payment (Monetary,required)
++ taea: 6.10 (number,required)
+
+## Loan (object)
++ monthly_payment (Monetary, required)
++ rate: 6.10 (number,required)
++ fees (Monetary, required)
+
+## PeriodInstallment  (object)
++ duration: 4 (number,required)
++ loan (Loan,required)
++ insurance (Insurance,required)
+
+## Simulation (object)
++ kind: VAT (string,required) - The kind of response.
++ project_amount (Monetary, required)
++ insurance_total_cost (Monetary, required)
++ insurance_rate: 6.10 (number,required)
++ loan_total_cost (Monetary,required)
++ loan_duration: 30 (number,required)
++ fees (Monetary,required)
++ loan_rate 15.00 (number)
++ installment (array[PeriodInstallment],required)
+
+## eplv simu (object)
++ simulation (Simulation,required)
++ request_id: abc1 (string,required)
+
+
+## Eplv simulation [/simulation/eplv]
+
+### Build a set of  loan simulations [POST]
+
+Create a list of simulation for on site advertissment.
+
++ Request (application/json)
+ 
+ + Attributes (eplv request)
+ 
++ Response 200 (application/json)
+  + Attributes (array[eplv simu])     
 
 ## Initialise transaction [/transaction]
 
